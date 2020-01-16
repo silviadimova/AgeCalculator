@@ -1,0 +1,75 @@
+ext {
+    androidXAppcompatVersion = '1.0.2'
+    androidXConstraintLayoutVersion = '1.1.3'
+    androidMaterialVersion = '1.0.0'
+
+    jUnitVersion = '4.12'
+    androidXTestRunnerVersion = '1.1.1'
+    espressoVersion = '3.1.1'
+    assertJVersion = '3.6.2'
+    uiAutomatorVersion = '2.2.0'
+
+    cucumberVersion = '4.2.5'
+
+    libraries = [
+            androidMaterial             : "com.google.android.material:material:$androidMaterialVersion",
+            androidXAppcompat           : "androidx.appcompat:appcompat:$androidXAppcompatVersion",
+            androidXConstrtaintLayout   : "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
+    ]
+
+    librariesTest = [
+            JUnit                       : "junit:junit:$jUnitVersion",
+            assertJCore                 : "org.assertj:assertj-core:$assertJVersion",
+
+            androidXEspressoContrib     : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+            androidXEspressoCore        : "androidx.test.espresso:espresso-core:$espressoVersion",
+            androidXEspressoIntents     : "androidx.test.espresso:espresso-intents:$espressoVersion",
+            androidXTestRules           : "androidx.test:rules:$androidXTestRunnerVersion",
+            androidXTestRunner          : "androidx.test:runner:$androidXTestRunnerVersion",
+            androidXExtTestRunner       : "androidx.test.ext:junit:$androidXTestRunnerVersion",
+
+            uiAutomator                 : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
+            cucumber                    : "io.cucumber:cucumber-android:$cucumberVersion"
+    ]
+}
+
+ext.commonAndroidDepenedencies = { dependencies ->
+    dependencies.implementation libraries.androidMaterial
+    dependencies.implementation libraries.androidXConstrtaintLayout
+    dependencies.implementation libraries.androidXAppcompat
+}
+
+ext.commonTestDependencies = { dependencies ->
+    dependencies.testImplementation librariesTest.JUnit
+    dependencies.testImplementation librariesTest.assertJCore
+}
+
+ext.commonAndroidTestDependencies = { dependencies ->
+    dependencies.androidTestImplementation(librariesTest.androidXEspressoCore) {
+        exclude module: 'annotations'
+    }
+    dependencies.androidTestImplementation(librariesTest.androidXEspressoContrib) {
+        exclude module: 'annotations'
+        exclude module: 'recyclerview'
+        exclude module: 'design'
+        exclude module: 'legacy-support-v4'
+    }
+    dependencies.androidTestImplementation(librariesTest.androidXEspressoIntents) {
+        exclude module: 'annotations'
+        exclude group: 'androidx', module: 'appcompat'
+        exclude group: 'androidx', module: 'legacy-support-v4'
+    }
+
+    dependencies.androidTestImplementation(librariesTest.androidXTestRunner) {
+        exclude module: 'annotations'
+    }
+
+    dependencies.androidTestImplementation(librariesTest.androidXTestRules) {
+        exclude module: 'annotations'
+    }
+
+    dependencies.androidTestImplementation librariesTest.androidXExtTestRunner
+    dependencies.androidTestImplementation librariesTest.uiAutomator
+    dependencies.androidTestImplementation librariesTest.cucumber
+
+}

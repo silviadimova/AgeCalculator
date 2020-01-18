@@ -9,7 +9,7 @@ ext {
     assertJVersion = '3.6.2'
     uiAutomatorVersion = '2.2.0'
 
-    cucumberVersion = '4.2.5'
+    cucumberVersion = '4.3.1'
 
     libraries = [
             androidMaterial             : "com.google.android.material:material:$androidMaterialVersion",

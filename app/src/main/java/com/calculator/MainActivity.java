@@ -34,9 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void calculateAge() {
         TextView dateView = findViewById(R.id.formDate);
+        TextView resultView = findViewById(R.id.formResult);
         String dateAsString = dateView.getText().toString();
-        if (dateAsString != null && !dateAsString.isEmpty()) {
+        boolean isTheDateValid = validateTheDate(dateAsString);
+        if (!dateAsString.isEmpty() && isTheDateValid) {
             try {
+
                 Date selectedDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateAsString);
                 Calendar cal1 = Calendar.getInstance();
                 Calendar cal2 = Calendar.getInstance();
@@ -46,11 +49,33 @@ public class MainActivity extends AppCompatActivity {
                 if (cal1.get(MONTH) > cal2.get(MONTH) || (cal1.get(MONTH) == cal2.get(MONTH) && cal1.get(DATE) > cal2.get(DATE))) {
                     diff--;
                 }
-                TextView resultView = findViewById(R.id.formResult);
                 resultView.setText("Your age is: " + diff);
             } catch (ParseException e) {
                 e.printStackTrace();
+                resultView.setText("");
             }
+        } else {
+            resultView.setText("");
+        }
+    }
+
+    private boolean validateTheDate(String dateAsString) {
+        String[] dateDetails = dateAsString.split("/");
+        try {
+            if (dateDetails[0].length() != 2 || dateDetails[1].length() != 2 || dateDetails[2].length() != 4) {
+                return false;
+            }
+
+            int day = Integer.parseInt(dateDetails[0]);
+            int month = Integer.parseInt(dateDetails[1]);
+            int year = Integer.parseInt(dateDetails[2]);
+            if ((day < 1 || day > 31) || (month < 1 || month > 12) || (year < 1900 || year > 2019)) {
+                return false;
+            }
+
+            return true;
+        } catch (Exception ex) {
+            return false;
         }
     }
 }

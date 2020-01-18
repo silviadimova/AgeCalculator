@@ -9,3 +9,6 @@ If you want to run only smoke tests execute :
 
 ### To run individual feature test by scenario name execute :
 ./gradlew connectedCheck -Pcucumber -Pscenario="Your scenario name here"
+
+
+Test report is located in -> https://github.com/silviadimova/AgeCalculator/tree/master/TEST_RESULTS/connected

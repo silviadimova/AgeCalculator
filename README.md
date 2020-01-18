@@ -11,4 +11,4 @@ If you want to run only smoke tests execute :
 ./gradlew connectedCheck -Pcucumber -Pscenario="Your scenario name here"
 
 
-Test report is located in -> https://github.com/silviadimova/AgeCalculator/tree/master/TEST_RESULTS/connected
+Test report is located in -> https://github.com/silviadimova/AgeCalculator/blob/master/TEST_RESULTS/connected/Test%20results%20-%20Class%20Home%20Screen.pdf

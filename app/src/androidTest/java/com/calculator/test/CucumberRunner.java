@@ -7,7 +7,7 @@ import cucumber.api.CucumberOptions;
         features = { "features" },
         plugin = { "pretty" },
         glue = { "com.calculator.stepDefinitions" },
-        tags = { "@ui", "@smoke", "@acceptance" }
+        tags = { "@ui, @smoke, @acceptance" }
         )
 public class CucumberRunner {
 }
